@@ -53,8 +53,7 @@ const Home = () => {
                     <i className="fas fa arrow-circle-right" />
                   </Link>
                 </div>
-              </div>
-            
+              </div>            
             </div>
           </div>
           

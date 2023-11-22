@@ -1,26 +1,20 @@
 {
   "usuarios": [
     {
-      "id": 1,
-      "nombre": "Santiago",
-      "apellido": "Burgos",
-      "email": "hola@gmail.com",
-      "password": "123456"
+      "nombre": "hola",
+      "apellido": "soy ",
+      "email": "pepe@gmail.com",
+      "password": "123456",
+      "tipoUsuario": "rol1",
+      "id": 1
     },
     {
-      "nombre": "lalalala",
-      "apellido": "lolololo",
-      "email": "lalaa@gmail.com",
-      "password": "123456",
+      "nombre": "yesika",
+      "apellido": "muñoz",
+      "email": "yesica@gmail.com",
+      "password": "1234567",
+      "tipoUsuario": "rol2",
       "id": 2
-    },
-    {
-      "nombre": "hola ",
-      "apellido": "hole",
-      "email": "holi@gmail.com",
-      "password": "123456",
-      "tipo_usuario": "cliente",
-      "id": 3
     }
   ],
   "tikets": [
@@ -42,6 +36,12 @@
       "id": "2",
       "respuesta": "hola zorra",
       "fecha": "2023-11-17"
+    }
+  ],
+  "tipoUsuario": [
+    {
+      "rol1": "administrador",
+      "rol2": "cliente"
     }
   ]
 }

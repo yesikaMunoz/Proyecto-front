@@ -4,65 +4,27 @@ import SidebarContainer from "../../componentes/SidebarContainer";
 import ContentHeader from "../../componentes/ContentHeader";
 import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
-import swal from "sweetalert"
 import { Link } from "react-router-dom";
 
-const VerTiketsAdmin = () => {
-  const [tikets, setTikets] = useState([]);
+const Respuestas = () => {
+
+
+  const [respuesta, setRespuesta] = useState([]);
 
   useEffect(()=>{
-    cargarTikets()
+    cargarRespuesta()
   },[])
 
-  const cargarTikets = async()=>{
-    const response = await APIInvoke.invokeGET("/tikets")
-    setTikets(response)
+  const cargarRespuesta = async()=>{
+    const response = await APIInvoke.invokeGET("/respuesta")
+    setRespuesta(response)
   }
   useEffect(()=>{
-    cargarTikets()
+    cargarRespuesta()
   },[])
 
-const eliminarTicket = async (e,id) => {
-  e.preventDefault();
-const response = await APIInvoke.invokeDELETE(`/tikets/${id}`);
-if (response) { 
-  const msg = "Ticket eliminado correctamente";
-  swal({
-    title: "Información",
-    text: msg,
-    icon: "success",
-    buttons: {
-      confirm: {
-        text: "Ok",
-        value: true,
-        visible: true,
-        className: "btn btn-primary",
-        closeModal: true,
-      },
-    },
-  });
-  cargarTikets()
-}else{
-  const msg = "El ticket no fue eliminado correctamente";
-  swal({
-    title: "Error",
-    text: msg,
-    icon: "error",
-    buttons: {
-      confirm: {
-        text: "Ok",
-        value: true,
-        visible: true,
-        className: "btn btn-danger",
-        closeModal: true,
-      },
-    },
-  });
-}
-}
-
-  return (
-    <div className="hold-transition sidebar-mini">
+    return ( 
+      <div className="hold-transition sidebar-mini">
       <div className="wrapper">
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
           <ul className="navbar-nav">
@@ -95,7 +57,7 @@ if (response) {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/RespuestasA"} className="nav-link">
+                  <Link to={"/Respuestas"} className="nav-link">
                     Respuestas
                   </Link>
                 </li>
@@ -114,12 +76,10 @@ if (response) {
           </div>
         </aside>
         <div className="content-wrapper">
-          <section className="content-header">
-            <div className="container-fluid">
-            <section className="content">
+        <section className="content">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Ver Tickets</h3>
+              <h3 className="card-title">Respuestas</h3>
               <div className="card-tools">
                 <button
                   type="button"
@@ -144,28 +104,24 @@ if (response) {
                 <thead>
                   <tr>
                     <th style={{ width: "10%" }}>Id</th>
-                    <th style={{ width: "15%" }}>usuario del Ticket</th>
-                    <th style={{ width: "30%" }}>Contenido del Tiket</th>
-                    <th style={{ width: "15%" }}>Fecha de Creacion</th>
-                    <th style={{ width: "25%" }}>Opciones</th>
+                    <th style={{ width: "25%" }}>Contenido de la respuesta</th>
+                    <th style={{ width: "20%" }}>Fecha de respuesta</th>
+                    <th style={{ width: "25%" }}>Ver</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   {
-                  tikets.map(
-                    item => 
+                    respuesta.map(
+                        item =>
                         <tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>{item.email}</td>
-                            <td>{item.contenido}</td>
+                            <td>{item.respuesta}</td>
                             <td>{item.fecha}</td>
-                            <td>
-                                <Link to={`/InfoTiket/${item.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>;
-                                <button onClick={(e)=>eliminarTicket(e, item.id)} className="btn btn-sm btn-danger">Eliminar</button>
+                            <td><Link to={`/InfoRespuesta/${item.id}`} className="btn btn-sm btn-primary">Ver respuesta</Link>
                             </td>
                         </tr>
-                  )
+                    )
                   }
 
                 </tbody>
@@ -173,8 +129,6 @@ if (response) {
             </div>
           </div>
         </section>
-            </div>
-          </section>
         </div>
         <footer className="main-footer">
           <div className="float-right d-none d-sm-block">
@@ -183,7 +137,7 @@ if (response) {
         </footer>
       </div>
     </div>
-  );
-};
-
-export default VerTiketsAdmin;
+     );
+}
+ 
+export default Respuestas;

@@ -1,155 +1,177 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import APIInvoke from '../../utils/APIInvoke';
+import APIInvoke from "../../utils/APIInvoke";
 import swal from 'sweetalert';
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const [usuario, setUsuario] = useState({
-    email: '',
-    password: ''
+  const [usuarios, setUsuarios] = useState({
+    email: "",
+    password: ""
   });
 
-  const { email, password } = usuario;
+  const { email, password } = usuarios;
 
   const onChange = (e) => {
-    setUsuario({
-      ...usuario,
+    setUsuarios({
+      ...usuarios,
       [e.target.name]: e.target.value
     });
   }
 
   useEffect(() => {
-    document.getElementById("email").focus();
+    const emailInput = document.getElementById("email");
+    if (emailInput) {
+      emailInput.focus();
+    }
   }, []);
 
   const iniciarSesion = async () => {
-    /*if (password.length < 6) {
-      const msg = "La contraseña debe tener al menos 6 caracteres";
-      swal({
-        title: "Error",
-        text: msg,
-        icon: "error",
-        buttons: {
-          confirm: {
-            text: "ok",
-            value: true,
-            visible: true,
-            className: "btn btn-danger",
-            closeModal: true
-          }
+    const verificarExistenciaUsuario = async (email, password) => {
+      try {
+        const response = await APIInvoke.invokeGET(
+          `/usuarios?email=${email}&password=${password}`
+        );
+        if (response && response.length > 0) {
+          return response[0];
         }
-      });
-    }	*/
-    try {
-      const response = await APIInvoke.invokeGET(`/Usuarios?email=${usuario.email}`);
+        return null;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
 
-      if (response.length === 0) {
-        const msg = "El usuario no existe. Verifique los datos ingresados.";
-        swal({
-          title: 'Error',
-          text: msg,
-          icon: 'error',
-          buttons: {
-            confirm: {
-              text: 'Ok',
-              value: true,
-              visible: true,
-              className: 'btn btn-danger',
-              closeModal: true
-            }
-          }
-        });
+    if (password.length < 6) {
+      mostrarError("Las contraseñas deben tener al menos 6 caracteres.");
+    } else {
+      const usuarioEncontrado = await verificarExistenciaUsuario(email, password);
+
+      if (!usuarioEncontrado) {
+        mostrarError("No fue posible iniciar sesión, verifique los datos ingresados.");
       } else {
-        const storedPassword = response[0].password;
-        if (password === storedPassword) {
-          const jwt = response.token;
-          localStorage.setItem("token", jwt);
+        mostrarExito("Bienvenid@");
+
+        // Obtener el tipo de usuario desde la respuesta del servidor
+        const { tipoUsuario } = usuarioEncontrado;
+
+        // Redirección a los dashboards correspondientes según el tipo de usuario
+        if (tipoUsuario === "rol1") {
+          navigate("/Home");
+        } else if (tipoUsuario === "rol2") {
           navigate("/Home2");
-        } else {
-          
-          const msg = "Contraseña incorrecta. Verifique los datos ingresados.";
-          swal({
-            title: 'Error',
-            text: msg,
-            icon: 'error',
-            buttons: {
-              confirm: {
-                text: 'Ok',
-                value: true,
-                visible: true,
-                className: 'btn btn-danger',
-                closeModal: true
-              }
-            }
-          });
         }
       }
-    } catch (error) {
-      console.error("Error al verificar el usuario:", error);
     }
-  };
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
     iniciarSesion();
   }
 
+  const mostrarError = (mensaje) => {
+    swal({
+      title: 'Error',
+      text: mensaje,
+      icon: 'error',
+      buttons: {
+        confirm: {
+          text: 'ok',
+          value: true,
+          visible: true,
+          className: 'btn btn-danger',
+          closeModal: true
+        }
+      }
+    });
+  };
+
+  const mostrarExito = (mensaje) => {
+    swal({
+      title: 'Informacion',
+      text: mensaje,
+      icon: 'success',
+      buttons: {
+        confirm: {
+          text: 'ok',
+          value: true,
+          visible: true,
+          className: 'btn btn-primary',
+          closeModal: true
+        }
+      }
+    });
+  };
+
   return (
-    <div className="hold-transition login-page">
-        <div className="login-box">
-          <div className="login-logo">
-            <Link to={"#"}>
-              <b>Inicio</b> Sesión
-            </Link>
-          </div>
-        <div className="card">
-          <div className="card-body login-card-body">
-          <p className="login-box-msg">Bienvenido, ingrese sus credenciales de acceso</p>
-          <form onSubmit={onSubmit}/*action="../../index3.html" method="post"*/>
+    <div className="login-box" style={{ width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="login-logo">
+        <b>Iniciar</b> Sesión
+      </div>
+      <div className="card">
+        <div className="card-body login-card-body">
+          <p className="login-box-msg">Sign in to start your session</p>
+          
+          <form onSubmit={onSubmit}>
             <div className="input-group mb-3">
-              <input type="email" 
-              className="form-control" 
-              placeholder="Email" 
-              id="email" 
-              name="email"
-              value={email}
-              onChange={onChange}
-              required />
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+
               <div className="input-group-append">
                 <div className="input-group-text">
                   <span className="fas fa-envelope" />
                 </div>
               </div>
             </div>
+
             <div className="input-group mb-3">
-              <input type="password" 
-              className="form-control" 
-              placeholder="Password" 
-              id="password" 
-              name="password"
-              value={password}
-              onChange={onChange}
-              required/>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                required
+              />
+
               <div className="input-group-append">
                 <div className="input-group-text">
                   <span className="fas fa-lock" />
                 </div>
               </div>
             </div>
+
+            <div className="row">
+              <div className="col-8"></div>
+            </div>
+
             <div className="social-auth-links text-center mb-3">
               <button type="submit" className="btn btn-block btn-primary">
-                <i /> Ingresar
+                Ingresar
               </button>
-              <Link to={"/CrearCuenta"} className="btn btn-block btn-danger">
+              <br />
+              <br />
+              <p>¿No tienes una cuenta?</p>
+              <Link to={"/registroPaciente"} className="btn btn-block btn-danger">
                 <i /> Crear Cuenta
               </Link>
             </div>
+            <Link to={"/"}>Cancelar</Link>
           </form>
-          </div>
-          </div>  
         </div>
+      </div>
     </div>
   );
 };

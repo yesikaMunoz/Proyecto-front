@@ -9,10 +9,11 @@ const CrearCuenta = () => {
     apellido: "",
     email: "",
     password: "",
-    confirmar: ""
+    confirmar: "",
+    tipoUsuario:"rol2"
   });
 
-  const { nombre, apellido, email, password, confirmar } = usuario;
+  const { nombre, apellido, email, password, confirmar, tipoUsuario } = usuario;
 
   const onChange = (e) => {
     setUsuario({
@@ -64,6 +65,7 @@ const CrearCuenta = () => {
           apellido: usuario.apellido,
           email: usuario.email,
           password: usuario.password,
+          tipoUsuario: usuario.tipoUsuario
         };
     
         const usuariosExistentes = await APIInvoke.invokeGET(`/Usuarios?email=${usuario.email}`);
@@ -124,7 +126,8 @@ const CrearCuenta = () => {
               apellido: "",
               email: "",
               password: "",
-              confirmar: ""
+              confirmar: "",
+              tipoUsuario:"rol2"
             });
           }
         }
@@ -237,8 +240,8 @@ const CrearCuenta = () => {
                   <i /> Enviar
                 </button>
               </div>
-              <Link to={"/"} className="btn btn-block btn-danger">
-                <i /> Volver al inicio
+              <Link to={"/Login"} className="btn btn-block btn-danger">
+                <i /> Login
               </Link>
             </form>
           </div>

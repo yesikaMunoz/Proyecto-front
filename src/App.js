@@ -10,8 +10,8 @@ import Respuestas from './paginas/tikets/Respuestas';
 import InfoRespuestas from './paginas/tikets/InfoRespuestas';
 import Inicio from './paginas/auth/inicio';
 import Home2 from './paginas/Home2';
-import ticketVista from './paginas/tikets/TicketVista';
 import VerTiketsAdmin from './paginas/tikets/VerTicketAdmin';
+import RespuestasA from './paginas/tikets/RespuestasA';
 
 
 
@@ -28,11 +28,11 @@ function App() {
           <Route path="/CrearCuenta" exact element={<CrearCuenta/>}/>
           <Route path="/Home" exact element={<Home/>}/>
           <Route path="/Home2" exact element={<Home2/>}/>
-          <Route path="/Tikets" exact element={<VerTikets/>}/>  
-          <Route path="/TicketsCliente" exact element={<ticketVista/>}/>  
+          <Route path="/Tikets" exact element={<VerTikets/>}/>   
           <Route path="/CrearTikets" exact element={<CrearTikets/>}/>
           <Route path="/InfoTiket/:id" exact element={<InfoTiket/>}/> 
           <Route path="/Respuestas" exact element={<Respuestas/>}/>
+          <Route path="/RespuestasA" exact element={<RespuestasA/>}/>
           <Route path="/InfoRespuesta/:id" exact element={<InfoRespuestas/>}/>
           <Route path="/ticketAdmin" exact element={<VerTiketsAdmin/>}/>
 

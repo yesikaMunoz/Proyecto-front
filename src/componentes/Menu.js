@@ -23,15 +23,6 @@ const Menu = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to={"/ticketAdmin"} className="nav-link">
-            <i className="nav-icon fas  fa-paper-plane" />
-            <p>
-              admin
-            </p>
-          </Link>
-        </li>
-
-        <li className="nav-item">
           <Link to={"/Respuestas"} className="nav-link">
             <i className="nav-icon fas fa-share" />     
             <p>

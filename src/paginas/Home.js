@@ -7,32 +7,74 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="wrapper">
-      <Navbar></Navbar>
-      <SidebarContainer></SidebarContainer>
-      <div class="content-wrapper">
-        <ContentHeader 
-            titulo={"Dashboard"}
-            breadCrumb1={"Inicio"}
-            breadCrumb2={"Dashboard"}
-            ruta2={"/Home"}
-        /> 
+    <div className="hold-transition sidebar-mini">
+      <div className="wrapper">
+        <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <b className="nav-link" data-widget="pushmenu" role="button">
+                <i className="fas fa-bars" />
+              </b>
+            </li>
+            <li className="nav-item d-none d-sm-inline-block">
+              <b className="nav-link"> Menú</b>
+            </li>
+          </ul>
+        </nav>
 
-
-        <section className="content">
+        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+          <b className="brand-link">
+            <span className="brand-text font-weight-light">Serviplus</span>
+          </b>
+          <div className="sidebar">
+            <nav className="mt-2">
+              <ul
+                className="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview"
+                role="menu"
+                data-accordion="false"
+              >
+                <li className="nav-item">
+                  <Link to={"/Home"} className="nav-link">
+                    Inicio
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/RespuestasA"} className="nav-link">
+                    Respuestas
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/ticketAdmin"} className="nav-link">
+                  tickets
+                  </Link>
+                </li>
+                <li class="nav-item">
+                  <Link to={"/"} className="nav-link">
+                      Cerrar Sesión
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+        <div className="content-wrapper">
+          <section className="content-header">
+            <div className="container-fluid">
+            <section className="content">
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-3 col-6">
                 <div className="small-box bg-info">
                   <div className="inner">
-                    <h3>Tikets</h3>
+                    <h3>Tickets</h3>
                     <p>&nbsp;</p>
                   </div>
                   <div className="icon">
                   <i className="nav-icon fas  fa-paper-plane" />
                   </div>
                   <Link to={"/ticketAdmin"} className="small-box-footer">
-                    Ver tikets
+                    Ver tickets
                     <i className="fas fa arrow-circle-right" />
                   </Link>
                 </div>
@@ -58,10 +100,15 @@ const Home = () => {
           </div>
           
         </section>
-
-          
+            </div>
+          </section>
+        </div>
+        <footer className="main-footer">
+          <div className="float-right d-none d-sm-block">
+          </div>
+          <strong>Serviplus © 2022-2023.</strong> Derechos reservados.
+        </footer>
       </div>
-      <Footer></Footer>
     </div>
   );
 };
