@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../componentes/Navbar";
-import SidebarContainer from "../../componentes/SidebarContainer";
-import ContentHeader from "../../componentes/ContentHeader";
-import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import { Link } from "react-router-dom";
 
@@ -57,7 +53,7 @@ const Respuestas = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/Respuestas"} className="nav-link">
+                  <Link to={"/RespuestasA"} className="nav-link">
                     Respuestas
                   </Link>
                 </li>
@@ -104,13 +100,12 @@ const Respuestas = () => {
                 <thead>
                   <tr>
                     <th style={{ width: "10%" }}>Id</th>
-                    <th style={{ width: "25%" }}>Contenido de la respuesta</th>
+                      <th style={{ width: "25%" }}>Contenido de la respuesta</th>
                     <th style={{ width: "20%" }}>Fecha de respuesta</th>
                     <th style={{ width: "25%" }}>Ver</th>
                   </tr>
                 </thead>
                 <tbody>
-
                   {
                     respuesta.map(
                         item =>

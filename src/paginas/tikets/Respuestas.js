@@ -4,9 +4,10 @@ import SidebarContainer from "../../componentes/SidebarContainer";
 import ContentHeader from "../../componentes/ContentHeader";
 import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Respuestas = () => {
+  const {id} = useParams();
 
 
   const [respuesta, setRespuesta] = useState([]);
@@ -19,9 +20,14 @@ const Respuestas = () => {
     const response = await APIInvoke.invokeGET("/respuesta")
     setRespuesta(response)
   }
+
+  const respuestaFiltrados = respuesta.filter(respuesta => respuesta.id === id)
+
   useEffect(()=>{
     cargarRespuesta()
   },[])
+
+ 
 
     return ( 
         <div className="wrapper">
@@ -71,18 +77,17 @@ const Respuestas = () => {
                 <tbody>
 
                   {
-                    respuesta.map(
-                        item =>
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.respuesta}</td>
-                            <td>{item.fecha}</td>
-                            <td><Link to={`/InfoRespuesta/${item.id}`} className="btn btn-sm btn-primary">Ver respuesta</Link>
+                     respuestaFiltrados.map(( 
+                      respuesta, i) => ( 
+                        <tr key={respuesta.id}>
+                            <td>{respuesta.id}</td>
+                            <td>{respuesta.respuesta}</td>
+                            <td>{respuesta.fecha}</td>
+                            <td><Link to={`/InfoRespuesta/${respuesta.id}`} className="btn btn-sm btn-primary">Ver respuesta</Link>
                             </td>
                         </tr>
                     )
-                  }
-
+                  )}
                 </tbody>
               </table>
             </div>

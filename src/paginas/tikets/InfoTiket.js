@@ -38,7 +38,7 @@ const InfoTiket = () => {
 
   const GuardarRespuesta = async () => {
     try {
-      await APIInvoke.invokePOST(`/respuesta`, { id, respuesta, fecha });
+      await APIInvoke.invokePOST("/respuesta", { id, respuesta, fecha });
 
       const msg = "La respuesta se envio correctamente."
             swal({
@@ -69,15 +69,58 @@ const InfoTiket = () => {
   };
   
   return (
-    <div className="wrapper">
-      <Navbar />
-      <SidebarContainer />
-      <div className="content-wrapper">
-        <ContentHeader
-          titulo={"Responder al Ticket"}
-          breadCrumb1={"Listado de Tickets"}
-          breadCrumb2={"Responder"}
-        />
+    <div className="hold-transition sidebar-mini">
+      <div className="wrapper">
+        <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <b className="nav-link" data-widget="pushmenu" role="button">
+                <i className="fas fa-bars" />
+              </b>
+            </li>
+            <li className="nav-item d-none d-sm-inline-block">
+              <b className="nav-link"> Menú</b>
+            </li>
+          </ul>
+        </nav>
+
+        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+          <b className="brand-link">
+            <span className="brand-text font-weight-light">Serviplus</span>
+          </b>
+          <div className="sidebar">
+            <nav className="mt-2">
+              <ul
+                className="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview"
+                role="menu"
+                data-accordion="false"
+              >
+                <li className="nav-item">
+                  <Link to={"/Home"} className="nav-link">
+                    Inicio
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/RespuestasA"} className="nav-link">
+                    Respuestas
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/ticketAdmin"} className="nav-link">
+                  tickets
+                  </Link>
+                </li>
+                <li class="nav-item">
+                  <Link to={"/"} className="nav-link">
+                      Cerrar Sesión
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+        <div className="content-wrapper">
         <section className="content">
           <div className="card">
             <div className="card-header bg-primary">
@@ -140,8 +183,13 @@ const InfoTiket = () => {
             </div>
           </div>
         </section>
+        </div>
+        <footer className="main-footer">
+          <div className="float-right d-none d-sm-block">
+          </div>
+          <strong>Serviplus © 2022-2023.</strong> Derechos reservados.
+        </footer>
       </div>
-      <Footer />
     </div>
   );
 };

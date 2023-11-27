@@ -3,9 +3,10 @@ import Navbar from "../componentes/Navbar";
 import SidebarContainer from "../componentes/SidebarContainer";
 import ContentHeader from "../componentes/ContentHeader";
 import Footer from "../componentes/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Home = () => {
+  const {id} = useParams();
   return (
     <div className="wrapper">
       <Navbar></Navbar>
@@ -31,7 +32,7 @@ const Home = () => {
                   <div className="icon">
                   <i className="nav-icon fas fa-share"></i>
                   </div>
-                  <Link to={"/CrearTikets"} className="small-box-footer">
+                  <Link to={`/CrearTikets/${id}`} className="small-box-footer">
                     Crear Ticket
                     <i className="fas fa arrow-circle-right" />
                   </Link>
@@ -48,12 +49,27 @@ const Home = () => {
                   <div className="icon">
                   <i className="nav-icon fas  fa-paper-plane" />
                   </div>
-                  <Link to={"/Tikets"} className="small-box-footer">
+                  <Link to={`/Tikets/${id}`} className="small-box-footer">
                     tus tickets
                     <i className="fas fa arrow-circle-right" />
                   </Link>
                 </div>
-              </div>            
+              </div> 
+              <div className="col-lg-3 col-6">
+                <div className="small-box bg-info">
+                  <div className="inner">
+                    <h3>chat</h3>
+                    <p>&nbsp;</p>
+                  </div>
+                  <div className="icon">
+                  <i className="nav-icon fas  fa-paper-plane" />
+                  </div>
+                  <Link to={"/clientechat" } className="small-box-footer">
+                    Chat
+                    <i className="fas fa arrow-circle-right" />
+                  </Link>
+                </div>
+              </div>              
             </div>
           </div>
           

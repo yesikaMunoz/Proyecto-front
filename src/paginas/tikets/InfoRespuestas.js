@@ -118,7 +118,7 @@ const InfoRespuestas = () => {
               </tbody>
               </thead>&nbsp;
               <tr></tr>
-              <Link to={`/Respuestas`} className="btn btn-danger ml-3">
+              <Link to={`/Respuestas/${id}`} className="btn btn-danger ml-3">
                 Volver
               </Link>
             </table>

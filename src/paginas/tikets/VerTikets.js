@@ -5,61 +5,67 @@ import ContentHeader from "../../componentes/ContentHeader";
 import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert"
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const VerTikets = () => {
+  const {id} = useParams();
+  const navigate = useNavigate();
   const [tikets, setTikets] = useState([]);
 
-  useEffect(()=>{
-    cargarTikets()
-  },[])
+  useEffect(() => {
+    cargarTikets();
+  }, []);
 
-  const cargarTikets = async()=>{
-    const response = await APIInvoke.invokeGET("/tikets")
-    setTikets(response)
-  }
-  useEffect(()=>{
-    cargarTikets()
-  },[])
+  const cargarTikets = async () => {
+    const response = await APIInvoke.invokeGET("/tikets");
+    setTikets(response);
+  };
 
-const eliminarTicket = async (e,id) => {
-  e.preventDefault();
-const response = await APIInvoke.invokeDELETE(`/tikets/${id}`);
-if (response) { 
-  const msg = "Ticket eliminado correctamente";
-  swal({
-    title: "Información",
-    text: msg,
-    icon: "success",
-    buttons: {
-      confirm: {
-        text: "Ok",
-        value: true,
-        visible: true,
-        className: "btn btn-primary",
-        closeModal: true,
-      },
-    },
-  });
-  cargarTikets()
-}else{
-  const msg = "El ticket no fue eliminado correctamente";
-  swal({
-    title: "Error",
-    text: msg,
-    icon: "error",
-    buttons: {
-      confirm: {
-        text: "Ok",
-        value: true,
-        visible: true,
-        className: "btn btn-danger",
-        closeModal: true,
-      },
-    },
-  });
-}
-}
+  const eliminarTiket = async (e,id) => {
+    e.preventDefault();
+  const response = await APIInvoke.invokeDELETE(`/tikets/${id}`);
+  if (response) { 
+    const msg = "Ticket eliminado correctamente";
+    swal({
+      title: "Información",
+      text: msg,
+      icon: "success",
+      buttons: {
+        confirm: {
+          text: "Ok",
+          value: true,
+          visible: true,
+          className: "btn btn-primary",
+          closeModal: true,
+          },
+        },
+      });
+      cargarTikets();
+    } else {
+      const msg = "El ticket no fue eliminado correctamente";
+      swal({
+        title: "Error",
+        text: msg,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Ok",
+            value: true,
+            visible: true,
+            className: "btn btn-danger",
+            closeModal: true,
+          },
+        },
+      });
+    }
+  };
+
+  const actualizarTicket = (id) => {
+    // Aquí rediriges a la ruta con el id correspondiente
+    navigate(`/editarTiket/${id}`);
+  };
+
+  const ticketsFiltrados = tikets.filter(tikets => tikets.id === id)
 
   return (
     <div className="wrapper">
@@ -110,21 +116,20 @@ if (response) {
                 <tbody>
 
                   {
-                  tikets.map(
-                    item => 
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.email}</td>
-                            <td>{item.contenido}</td>
-                            <td>{item.fecha}</td>
+                  ticketsFiltrados.map(
+                    tiket => 
+                        <tr key={tiket.id}>
+                            <td>{tiket.id}</td>
+                            <td>{tiket.email}</td>
+                            <td>{tiket.contenido}</td>
+                            <td>{tiket.fecha}</td>
                             <td>
-                                <Link to={`/ticketVista/${item.id}`} className="btn btn-sm btn-primary">Ver contenido</Link>;
-                                <button onClick={(e)=>eliminarTicket(e, item.id)} className="btn btn-sm btn-danger">Eliminar</button>
+                                <Link to={`/editarTiket/${tiket.id}`} className="btn btn-sm btn-primary">Actualizar</Link>;
+                                <button onClick={(e)=>eliminarTiket(e, tiket.id)} className="btn btn-sm btn-danger">Eliminar</button>
                             </td>
                         </tr>
                   )
                   }
-
                 </tbody>
               </table>
             </div>

@@ -1,13 +1,14 @@
 import React from "react";
 import Menu from "./Menu";
 import Logo from '../../node_modules/admin-lte/dist/img/AdminLTELogo.png'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 
 const SidebarContainer = () => {
+  const {id} = useParams();
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
-      <Link to={"/Home2"} className="brand-link">
+      <Link to={`/Home2/${id}`} className="brand-link">
         <img
           src={Logo}
           alt="AdminLTE Logo"
@@ -25,7 +26,7 @@ const SidebarContainer = () => {
             &nbsp;
           </div>
           <div className="info"> 
-            <Link to={"/Home2 "} className="d-block">
+            <Link to={`/Home2/${id}`} className="d-block">
               Menu Principal
             </Link>
           </div>

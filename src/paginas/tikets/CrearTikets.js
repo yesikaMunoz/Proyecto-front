@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react";
 import swal from "sweetalert";
 import APIInvoke from "../../utils/APIInvoke";
-import { Link } from "react-router-dom";
+import { Link, useParams , useNavigate } from "react-router-dom";
 
 const CrearTikets = () => {
-
+const {id} = useParams();
+const navigate = useNavigate();
 
     const [tiket, setTiket] = useState({
+        id:null,
         email:"",
         contenido:"",
         fecha:""
@@ -24,6 +26,7 @@ const CrearTikets = () => {
 
     const crearTicket = async () => {
         const data = {
+            id:id,
             email: tiket.email,
             contenido: tiket.contenido,
             fecha: tiket.fecha
@@ -67,10 +70,12 @@ const CrearTikets = () => {
             });
 
             setTiket({
+                id:id,
                 email: '',
                 contenido: '',
                 fecha: ''
             })
+            navigate(`/home2/${id}`)
         }
     }
 
@@ -79,6 +84,7 @@ const CrearTikets = () => {
         crearTicket();
     }
 
+    const fechaActual = new Date().toISOString().split("T")[0];
   return (
     <div>
    <div class="container">
@@ -89,7 +95,7 @@ const CrearTikets = () => {
         <div class="card-body">
           <form onSubmit={onSubmit}>
             <div class="form-group">
-              <label for="email">Email (usuario)</label>
+              <label for="email">Email(usuario)</label>
               <input
                 type="email"
                 class="form-control"
@@ -125,6 +131,7 @@ const CrearTikets = () => {
                 onChange={onChange}
                 value={fecha}
                 required
+                min={fechaActual}
               />
             </div>
             <div className="social-auth-links text-center mb-3">
@@ -132,7 +139,7 @@ const CrearTikets = () => {
                   <i /> Enviar
                 </button>
               </div>
-              <Link to={"/home2"} className="btn btn-block btn-danger">
+              <Link to={`/Home2/${id}`} className="btn btn-block btn-danger">
                 <i /> Volver
               </Link>
           </form>

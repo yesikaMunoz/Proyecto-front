@@ -1,8 +1,4 @@
 import React from "react";
-import Navbar from "../componentes/Navbar";
-import SidebarContainer from "../componentes/SidebarContainer";
-import ContentHeader from "../componentes/ContentHeader";
-import Footer from "../componentes/Footer";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -96,6 +92,36 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+              <div className="col-lg-3 col-6">
+                <div className="small-box bg-info">
+                  <div className="inner">
+                    <h3>Chat</h3>
+                    <p>&nbsp;</p>
+                  </div>
+                  <div className="icon">
+                  <i className="nav-icon fas  fa-paper-plane" />
+                  </div>
+                  <Link to={`/adminchat`} className="small-box-footer">
+                    Chat
+                    <i className="fas fa arrow-circle-right" />
+                  </Link>
+                </div>
+              </div> 
+              <div className="col-lg-3 col-6">
+                <div className="small-box bg-success">
+                  <div className="inner">
+                    <h3>Crear cuenta admin</h3>
+                    <p>&nbsp;</p>
+                  </div>
+                  <div className="icon">
+                  <i className="nav-icon fas  fa-paper-plane" />
+                  </div>
+                  <Link to={`/CrearCuentaAdmi`} className="small-box-footer">
+                    Crear cuenta admin
+                    <i className="fas fa arrow-circle-right" />
+                  </Link>
+                </div>
+              </div> 
             </div>
           </div>
           

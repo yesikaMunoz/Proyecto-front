@@ -12,6 +12,10 @@ import Inicio from './paginas/auth/inicio';
 import Home2 from './paginas/Home2';
 import VerTiketsAdmin from './paginas/tikets/VerTicketAdmin';
 import RespuestasA from './paginas/tikets/RespuestasA';
+import EditarTickets from './paginas/tikets/EditarTickets';
+import AdminPage from './paginas/tikets/adminchat';
+import ClientPage from './paginas/tikets/clientechat';
+import CrearCuentaAdmin from './paginas/auth/crearCuentaAdmi';
 
 
 
@@ -26,15 +30,20 @@ function App() {
           <Route path="/" exact element={<Inicio/>}/> 
           <Route path="/login" exact element={<Login/>}/> 
           <Route path="/CrearCuenta" exact element={<CrearCuenta/>}/>
+          <Route path="/CrearCuentaAdmi" exact element={<CrearCuentaAdmin/>}/>
           <Route path="/Home" exact element={<Home/>}/>
-          <Route path="/Home2" exact element={<Home2/>}/>
-          <Route path="/Tikets" exact element={<VerTikets/>}/>   
-          <Route path="/CrearTikets" exact element={<CrearTikets/>}/>
+          <Route path="/Home2/:id" exact element={<Home2/>}/>
+          <Route path="/Tikets/:id" exact element={<VerTikets/>}/>   
+          <Route path="/CrearTikets/:id" exact element={<CrearTikets/>}/>
           <Route path="/InfoTiket/:id" exact element={<InfoTiket/>}/> 
-          <Route path="/Respuestas" exact element={<Respuestas/>}/>
+          <Route path="/Respuestas/:id" exact element={<Respuestas/>}/>
           <Route path="/RespuestasA" exact element={<RespuestasA/>}/>
           <Route path="/InfoRespuesta/:id" exact element={<InfoRespuestas/>}/>
           <Route path="/ticketAdmin" exact element={<VerTiketsAdmin/>}/>
+          <Route path="/editarTiket/:id" exact element={<EditarTickets/>}/>
+          <Route path="/adminchat"  exact element={<AdminPage/>} />
+          <Route path="/clientechat"  exact element={<ClientPage/>} />
+
 
 
 

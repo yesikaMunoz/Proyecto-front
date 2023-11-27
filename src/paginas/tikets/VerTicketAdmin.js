@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../componentes/Navbar";
-import SidebarContainer from "../../componentes/SidebarContainer";
-import ContentHeader from "../../componentes/ContentHeader";
-import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert"
 import { Link } from "react-router-dom";
@@ -154,15 +150,15 @@ if (response) {
 
                   {
                   tikets.map(
-                    item => 
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.email}</td>
-                            <td>{item.contenido}</td>
-                            <td>{item.fecha}</td>
+                    tiket => 
+                        <tr key={tiket.id}>
+                            <td>{tiket.id}</td>
+                            <td>{tiket.email}</td>
+                            <td>{tiket.contenido}</td>
+                            <td>{tiket.fecha}</td>
                             <td>
-                                <Link to={`/InfoTiket/${item.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>;
-                                <button onClick={(e)=>eliminarTicket(e, item.id)} className="btn btn-sm btn-danger">Eliminar</button>
+                                <Link to={`/InfoTiket/${tiket.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>;
+                                <button onClick={(e)=>eliminarTicket(e, tiket.id)} className="btn btn-sm btn-danger">Eliminar</button>
                             </td>
                         </tr>
                   )
