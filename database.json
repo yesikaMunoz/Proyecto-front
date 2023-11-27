@@ -1,14 +1,6 @@
 {
   "usuarios": [
     {
-      "nombre": "hola",
-      "apellido": "soy ",
-      "email": "pepe@gmail.com",
-      "password": "123456",
-      "tipoUsuario": "rol1",
-      "id": 1
-    },
-    {
       "nombre": "laura",
       "apellido": "mochuelo",
       "email": "laura@gmail.com",
@@ -25,38 +17,93 @@
       "id": 4
     },
     {
-      "nombre": "kevin ",
-      "apellido": "otalora",
-      "email": "kevin@gmail.com",
+      "nombre": "lola",
+      "apellido": "lolo",
+      "email": "lola@gmail.com",
       "password": "123456",
       "tipoUsuario": "rol2",
       "id": 5
+    },
+    {
+      "nombre": "lorena",
+      "apellido": "ramirez",
+      "email": "lorena@gmail.com",
+      "password": "123456",
+      "tipoUsuario": "rol2",
+      "id": 6
+    },
+    {
+      "nombre": "yesika",
+      "apellido": "seulveda",
+      "email": "yesica20@gmail.com",
+      "password": "123456",
+      "tipoUsuario": "rol2",
+      "id": 7
     }
   ],
   "tikets": [
     {
-      "id": "5",
-      "email": "yesika@gmail.com",
-      "contenido": "lkjhgfds",
-      "fecha": "2023-11-29"
+      "id": "4",
+      "email": "lola@gmail.com",
+      "contenido": "como estas ",
+      "fecha": "2023-12-06"
     },
     {
-      "id": "4",
-      "email": "juan@gmail.com",
-      "contenido": "jhgfds",
-      "fecha": "2023-11-25"
+      "id": "5",
+      "email": "lola@gmail.com",
+      "contenido": "xcjhhg",
+      "fecha": "2023-11-28"
+    },
+    {
+      "id": "6",
+      "email": "lorena@gmail.com",
+      "contenido": "mal servicio",
+      "fecha": "2023-11-30"
+    },
+    {
+      "email": "lola@gmail.com",
+      "contenido": "como estas ",
+      "fecha": "2023-11-27",
+      "userId": "5",
+      "id": "mWSCQRh"
+    },
+    {
+      "email": "cheilablanca@gmail.com",
+      "contenido": "como estas ",
+      "fecha": "2023-11-27",
+      "userId": "5",
+      "id": "46Qa4VH"
+    },
+    {
+      "email": "lola@gmail.com",
+      "contenido": "sasasasasa",
+      "fecha": "2023-11-28",
+      "userId": "3",
+      "id": "KW0KW8E"
+    },
+    {
+      "email": "cheilablanca@gmail.com",
+      "contenido": "me discriminan por ser blanca",
+      "fecha": "2023-11-28",
+      "userId": "3",
+      "id": "J0_otuu"
     }
   ],
   "respuesta": [
     {
       "id": "5",
-      "respuesta": "hgfds",
-      "fecha": "2023-11-09"
+      "respuesta": "ntynh",
+      "fecha": "2023-11-28"
     },
     {
       "id": "4",
-      "respuesta": "lkjhgfd",
-      "fecha": "2023-11-30"
+      "respuesta": "en proceso",
+      "fecha": "2023-11-29"
+    },
+    {
+      "id": "46Qa4VH",
+      "respuesta": "sasasa",
+      "fecha": "2023-11-29"
     }
   ],
   "tipoUsuario": [
@@ -69,26 +116,32 @@
     {
       "content": "hola",
       "tipoUsuario": "administador",
+      "id": 5
+    },
+    {
+      "content": "sasa",
+      "tipoUsuario": "administador",
       "id": 6
     },
     {
-      "content": "hola",
+      "content": "dsds",
       "tipoUsuario": "cliente",
       "id": 7
     },
     {
-      "content": "hola cariño",
+      "content": "SSD",
       "tipoUsuario": "cliente",
+      "userId": "7",
       "id": 8
     },
     {
-      "content": "hola papi",
-      "tipoUsuario": "administador",
+      "content": "hola",
+      "tipoUsuario": "cliente",
       "id": 9
     },
     {
-      "content": "hola linde",
-      "tipoUsuario": "cliente",
+      "content": "as",
+      "tipoUsuario": "administador",
       "id": 10
     }
   ]

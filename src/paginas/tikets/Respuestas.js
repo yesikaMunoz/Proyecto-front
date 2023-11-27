@@ -4,11 +4,11 @@ import SidebarContainer from "../../componentes/SidebarContainer";
 import ContentHeader from "../../componentes/ContentHeader";
 import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
-import { Link, useParams } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 
 const Respuestas = () => {
-  const {id} = useParams();
 
+  const userId = localStorage.getItem("id"); 
 
   const [respuesta, setRespuesta] = useState([]);
 
@@ -20,8 +20,6 @@ const Respuestas = () => {
     const response = await APIInvoke.invokeGET("/respuesta")
     setRespuesta(response)
   }
-
-  const respuestaFiltrados = respuesta.filter(respuesta => respuesta.id === id)
 
   useEffect(()=>{
     cargarRespuesta()
@@ -77,7 +75,7 @@ const Respuestas = () => {
                 <tbody>
 
                   {
-                     respuestaFiltrados.map(( 
+                     respuesta.map(( 
                       respuesta, i) => ( 
                         <tr key={respuesta.id}>
                             <td>{respuesta.id}</td>

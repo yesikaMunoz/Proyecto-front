@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Footer from "../../componentes/Footer";
-import Navbar from "../../componentes/Navbar";
-import SidebarContainer from "../../componentes/SidebarContainer";
-import ContentHeader from "../../componentes/ContentHeader";
 import { useParams } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
 import { Link } from "react-router-dom";
@@ -10,7 +6,7 @@ import swal from "sweetalert";
 
 const InfoTiket = () => {
   const { id } = useParams();
-  const [tiket, setTicket] = useState(null);
+  const [tiket, setTiket] = useState(null);
   const [respuesta, setRespuesta] = useState("");
   const [fecha, setFecha] = useState("");
   const [loading, setLoading] = useState(true);
@@ -18,10 +14,10 @@ const InfoTiket = () => {
   useEffect(() => {
     const cargarTicket = async () => {
       try {
-        const response = await APIInvoke.invokeGET(`/Tikets/${id}`);
+        const response = await APIInvoke.invokeGET(`/tikets/${id}`);
 
         if (response && typeof response === "object") {
-          setTicket(response);
+          setTiket(response);
         } else {
           console.error(
             "La respuesta de la API no contiene detalles válidos para el ticket."
@@ -67,6 +63,7 @@ const InfoTiket = () => {
     }
     
   };
+  const fechaActual = new Date().toISOString().split("T")[0];
   
   return (
     <div className="hold-transition sidebar-mini">
@@ -156,6 +153,7 @@ const InfoTiket = () => {
                         value={fecha}
                         onChange={(e) => setFecha(e.target.value)}
                         required
+                        min={fechaActual} 
                     />
                     </div>
                   <div className="form-group">
@@ -175,7 +173,7 @@ const InfoTiket = () => {
                   >
                     Guardar Respuesta
                   </button>
-                  <Link to={`/Tikets`} className="btn btn-danger ml-3">
+                  <Link to={`/ticketAdmin`} className="btn btn-danger ml-3">
                     Volver
                   </Link>
                 </div>

@@ -141,19 +141,119 @@ const CrearCuenta = () => {
 
   return (
     <div className="hold-transition login-page">
-      <div className="login-box">
-        <div className="login-logo">
-          <Link to={"#"}>
-            <b>Crea tu</b> Usuario
-          </Link>
+    <div className="login-box">
+      <div className="login-logo">
+        <Link to={"#"}>
+          <b>Crea tu</b> Usuario
+        </Link>
+      </div>
+      <div className="card">
+        <div className="card-body login-card-body">
+          <p className="login-box-msg">
+            Bienvenido, ingrese los datos requeridos para crear un usuario
+            nuevo
+          </p>
+          <form onSubmit={onSubmit}>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nombre"
+                name="nombre"
+                value={nombre}
+                onChange={onChange}
+                required
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-user" />
+                </div>
+              </div>
+            </div>
+
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Apellido"
+                name="apellido"
+                value={apellido}
+                onChange={onChange}
+                required
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-user" />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-envelope" />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Contraseña"
+                name="password"
+                value={password}
+                onChange={onChange}
+                required
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-lock" />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirmacion de Contraseña"
+                name="confirmar"
+                value={confirmar}
+                onChange={onChange}
+                required
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-lock" />
+                </div>
+              </div>
+            </div>
+            <div className="social-auth-links text-center mb-3">
+              <button type="submit" className="btn btn-block btn-primary">
+                <i /> Enviar
+              </button>
+            </div>
+            <Link to={"/Login"} className="btn btn-block btn-danger">
+              <i /> Login
+            </Link>
+          </form>
         </div>
-        <div className="card">
-          <div className="card-body login-card-body">
-            <p className="login-box-msg">
-              Bienvenido, ingrese los datos requeridos para crear un usuario
-              nuevo
-            </p>
-            <form onSubmit={onSubmit}>
+      </div>
+    </div>
+  </div>
+  );
+};
+
+export default CrearCuenta;
+
+/*<form onSubmit={onSubmit}>
               <div className="input-group mb-3">
                 <input
                   type="text"
@@ -243,12 +343,4 @@ const CrearCuenta = () => {
               <Link to={"/Login"} className="btn btn-block btn-danger">
                 <i /> Login
               </Link>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CrearCuenta;
+            </form>*/ 

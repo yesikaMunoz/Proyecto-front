@@ -6,14 +6,15 @@ import '../../css/chat.css'
 const Chat = ({ tipoUsuario }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const userId = localStorage.getItem("id");
 
     useEffect(() => {
-        // Obtener mensajes desde la API al cargar el componente
-        axios.get('http://localhost:4000/messages')
-            .then(response => setMessages(response.data))
-            .catch(error => console.error('Error fetching messages:', error));
-    }, []);
-
+      // Obtener mensajes desde la API solo para el usuario actual
+      axios
+        .get(`http://localhost:4000/messages/${userId}`)
+        .then((response) => setMessages(response.data))
+        .catch((error) => console.error("Error fetching messages:", error));
+    }, [userId]);
     const handleSendMessage = () => {
         // Enviar un nuevo mensaje Link la API
         axios.post('http://localhost:4000/messages', { content: newMessage, tipoUsuario })
@@ -78,7 +79,6 @@ const Chat = ({ tipoUsuario }) => {
 };
 
 export default Chat;
-
 /*
 <div className="page-content page-container" id="page-content">
     <div className="padding">

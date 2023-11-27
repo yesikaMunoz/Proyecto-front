@@ -1,117 +1,162 @@
-  import React, { useState, useEffect } from "react";
-  import { Link, useNavigate } from "react-router-dom";
-  import APIInvoke from "../../utils/APIInvoke";
-  import swal from 'sweetalert';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import APIInvoke from "../../utils/APIInvoke.js";
+import swal from "sweetalert";
 
-  const Login = () => {
+const Login = () => {
     const navigate = useNavigate();
-
-    const [usuarios, setUsuarios] = useState({
-      email: "",
-      password: "",
-      id : null
+    const [usuario, setUsuario] = useState({
+        email: '',
+        password: ''
     });
 
-    const { email, password } = usuarios;
+    const { email, password } = usuario;
 
     const onChange = (e) => {
-      setUsuarios({
-        ...usuarios,
-        [e.target.name]: e.target.value
-      });
+        setUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        });
     }
 
     useEffect(() => {
-      const emailInput = document.getElementById("email");
-      if (emailInput) {
-        emailInput.focus();
-      }
-    }, []);
+        document.getElementById("email").focus();
+    }, [])
 
-    const iniciarSesion = async () => {
-      const verificarExistenciaUsuario = async (email, password) => {
-        try {
-          const response = await APIInvoke.invokeGET(
-            `/usuarios?email=${email}&password=${password}`
-          );
-          if (response && response.length > 0) {
-            return response[0];
-          }
-          return null;
-        } catch (error) {
-          console.error(error);
-          return null;
-        }
-      }
+    const determineUserRole = (email) => {
+        const emailDomain = email.split("@")[1];
+        const isAdmin = emailDomain.toLowerCase() === "serviplus.com"; 
+        return isAdmin ? "admin" : "user";
+    };
 
-      if (password.length < 6) {
-        mostrarError("Las contraseñas deben tener al menos 6 caracteres.");
-      } else {
-        const usuarioEncontrado = await verificarExistenciaUsuario(email, password);
+    const connect = async () => {
+        const verify = async (email, password) => {
+            try {
+                const response = await APIInvoke.invokeGET(
+                    `/Usuarios?email=${email}&password=${password}`
+                );
+                if (response && response.length > 0) {
+                    return response[0];
+                }
+                return null;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        };
 
-        if (!usuarioEncontrado) {
-          mostrarError("No fue posible iniciar sesión, verifique los datos ingresados.");
+        if (password.length < 6) {
+            const msg = "Contraseña demasiado corta (Debe superar los 6 caracteres).";
+            swal({
+                title: "😠",
+                text: msg,
+                icon: "info",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
         } else {
-          mostrarExito("Bienvenid@");
+            const existingUser = await verify(email, password);
 
-          // Obtener el tipo de usuario desde la respuesta del servidor
-          const { tipoUsuario , id} = usuarioEncontrado;
+            if (!existingUser) {
+                const msg = "No fue posible iniciar sesión, usuario o contraseña incorrecto.";
+                swal({
+                    title: '😑',
+                    text: msg,
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true
+                        }
+                    }
+                });
+            } else {
+                const msg = "Ingreso exitoso";
+                swal({
+                    title: '🥳🥳',
+                    text: msg,
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true
+                        }
+                    }
+                });
 
-          setUsuarios ({
-            ...usuarios,
-            id
-          })
+                // Determinar el tipo de cuenta basado en el correo electrónico
+                const role = determineUserRole(email);
 
-          // Redirección a los dashboards correspondientes según el tipo de usuario
-          if (tipoUsuario === "rol1") {
-            navigate("/Home");
-          } else if (tipoUsuario === "rol2") {
-            navigate(`/Home2/${id}`);
-          }
+                // Guardar el tipo de cuenta en el local storage
+                localStorage.setItem('role', role);
+
+                // Contener el token de acceso
+                const jwt = existingUser.id;
+
+                // Guardar el token en el local storage
+                localStorage.setItem('id', jwt);
+
+                // Redireccionar según el tipo de cuenta
+                if (role === 'user') {
+                    navigate("/Home2");
+                    const msg = "Ingreso exitoso, bienvenido Usuario";
+                    swal({
+                        title: 'Felicidades',
+                        text: msg,
+                        icon: 'success',
+                        buttons: {
+                            confirm: {
+                                text: 'Ok',
+                                value: true,
+                                visible: true,
+                                className: 'btn btn-danger',
+                                closeModal: true
+                            }
+                        }
+                    });
+                } else if (role === 'admin') {
+                    navigate("/Home");
+                     const msg = "Ingreso exitoso, bienvenido Admin";
+                swal({
+                    title: 'creado',
+                    text: msg,
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true
+                        }
+                    }
+                    
+                });
+                }
+            }
         }
-      }
     }
 
     const onSubmit = (e) => {
-      e.preventDefault();
-      iniciarSesion();
+        e.preventDefault();
+        connect();
     }
 
-    const mostrarError = (mensaje) => {
-      swal({
-        title: 'Error',
-        text: mensaje,
-        icon: 'error',
-        buttons: {
-          confirm: {
-            text: 'ok',
-            value: true,
-            visible: true,
-            className: 'btn btn-danger',
-            closeModal: true
-          }
-        }
-      });
-    };
 
-    const mostrarExito = (mensaje) => {
-      swal({
-        title: 'Informacion',
-        text: mensaje,
-        icon: 'success',
-        buttons: {
-          confirm: {
-            text: 'ok',
-            value: true,
-            visible: true,
-            className: 'btn btn-primary',
-            closeModal: true
-          }
-        }
-      });
-    };
-
-    return (
+    return   (
       <div className="login-box" style={{ width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div className="login-logo">
           <b>Iniciar</b> Sesión
@@ -175,8 +220,9 @@
           </div>
         </div>
       </div>
-    );  
+    );
   };
+  
+export default Login;
 
-  export default Login;
 

@@ -4,69 +4,65 @@ import SidebarContainer from "../../componentes/SidebarContainer";
 import ContentHeader from "../../componentes/ContentHeader";
 import Footer from "../../componentes/Footer";
 import APIInvoke from "../../utils/APIInvoke";
-import swal from "sweetalert"
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 const VerTikets = () => {
-  const {id} = useParams();
-  const navigate = useNavigate();
   const [tikets, setTikets] = useState([]);
+    
+    const userId = localStorage.getItem("id"); // Obtener ID del usuario
 
-  useEffect(() => {
-    cargarTikets();
-  }, []);
+    const cargarTickets = async () => {
+        try {
+            const response = await APIInvoke.invokeGET(`/Tikets?userId=${userId}`);
+            setTikets(response);
+        } catch (error) {
+            console.error("Error al cargar los tickets:", error);
+        }
+    };
+    useEffect(() => {
+        cargarTickets();
+    }, [])
 
-  const cargarTikets = async () => {
-    const response = await APIInvoke.invokeGET("/tikets");
-    setTikets(response);
-  };
-
-  const eliminarTiket = async (e,id) => {
-    e.preventDefault();
-  const response = await APIInvoke.invokeDELETE(`/tikets/${id}`);
-  if (response) { 
-    const msg = "Ticket eliminado correctamente";
-    swal({
-      title: "Información",
-      text: msg,
-      icon: "success",
-      buttons: {
-        confirm: {
-          text: "Ok",
-          value: true,
-          visible: true,
-          className: "btn btn-primary",
-          closeModal: true,
-          },
-        },
-      });
-      cargarTikets();
-    } else {
-      const msg = "El ticket no fue eliminado correctamente";
+    const eliminarTiket = async (e,id) => {
+      e.preventDefault();
+    const response = await APIInvoke.invokeDELETE(`/tikets/${id}`);
+    if (response) { 
+      const msg = "Ticket eliminado correctamente";
       swal({
-        title: "Error",
+        title: "Información",
         text: msg,
-        icon: "error",
+        icon: "success",
         buttons: {
           confirm: {
             text: "Ok",
             value: true,
             visible: true,
-            className: "btn btn-danger",
+            className: "btn btn-primary",
             closeModal: true,
+            },
           },
-        },
-      });
-    }
-  };
-
-  const actualizarTicket = (id) => {
-    // Aquí rediriges a la ruta con el id correspondiente
-    navigate(`/editarTiket/${id}`);
-  };
-
-  const ticketsFiltrados = tikets.filter(tikets => tikets.id === id)
-
+        });
+        cargarTickets();
+      } else {
+        const msg = "El ticket no fue eliminado correctamente";
+        swal({
+          title: "Error",
+          text: msg,
+          icon: "error",
+          buttons: {
+            confirm: {
+              text: "Ok",
+              value: true,
+              visible: true,
+              className: "btn btn-danger",
+              closeModal: true,
+            },
+          },
+        });
+      }
+    };
+  
   return (
     <div className="wrapper">
       <Navbar></Navbar>
@@ -116,7 +112,7 @@ const VerTikets = () => {
                 <tbody>
 
                   {
-                  ticketsFiltrados.map(
+                  tikets.map(
                     tiket => 
                         <tr key={tiket.id}>
                             <td>{tiket.id}</td>
@@ -124,7 +120,7 @@ const VerTikets = () => {
                             <td>{tiket.contenido}</td>
                             <td>{tiket.fecha}</td>
                             <td>
-                                <Link to={`/editarTiket/${tiket.id}`} className="btn btn-sm btn-primary">Actualizar</Link>;
+                                <Link to={`/editarTiket/${tiket.id}`} className="btn btn-sm btn-primary">Actualizar</Link>
                                 <button onClick={(e)=>eliminarTiket(e, tiket.id)} className="btn btn-sm btn-danger">Eliminar</button>
                             </td>
                         </tr>

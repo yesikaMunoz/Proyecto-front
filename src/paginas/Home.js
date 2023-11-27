@@ -86,7 +86,7 @@ const Home = () => {
                   <div className="icon">
                   <i className="nav-icon fas fa-share"></i>
                   </div>
-                  <Link to={"/Respuestas"} className="small-box-footer">
+                  <Link to={"/RespuestasA"} className="small-box-footer">
                     Ver Respuestas
                     <i className="fas fa arrow-circle-right" />
                   </Link>

@@ -1,89 +1,92 @@
 import React, {useState, useEffect} from "react";
-import swal from "sweetalert";
+import { Link } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
-import { Link, useParams , useNavigate } from "react-router-dom";
+import swal from 'sweetalert';
+
 
 const CrearTikets = () => {
-const {id} = useParams();
-const navigate = useNavigate();
+    const [tikets, setTikets] = useState({
+      email:'',
+      contenido: '',
+      fecha: ''
+    });
+    
+    const { email, contenido, fecha } = tikets;
+    useEffect(() => {
+        document.getElementById("email").focus();
+    }, [])
 
-    const [tiket, setTiket] = useState({
-        id:null,
-        email:"",
-        contenido:"",
-        fecha:""
-
-    })
-
-    const{email,contenido,fecha}=tiket
-
-    const onChange=(e)=>{
-        setTiket({
-            ...tiket,
-            [e.target.name]:e.target.value
+    const onChange = (e) => {
+        setTikets({
+            ...tikets,
+            [e.target.name]: e.target.value
         })
     }
 
     const crearTicket = async () => {
-        const data = {
-            id:id,
-            email: tiket.email,
-            contenido: tiket.contenido,
-            fecha: tiket.fecha
-        }
+        try {
+            // Recupera el ID de usuario desde el almacenamiento local
+            const userId = localStorage.getItem("id");
 
+            const data = {
+                email: tikets.email,
+                contenido: tikets.contenido,
+                fecha: tikets.fecha,
+                userId: userId // Agrega el ID de usuario al ticket
+            }; 
+    
+            const response = await APIInvoke.invokePOST(`/Tikets`, data);
+            const idTickets = response.id;
+            
 
-        const response = await APIInvoke.invokePOST(`/Tikets`, data);
-        const idTicket = response.id;
-
-        if (idTicket === '') {
-            const msg = "El ticket no fue creado correctamente."
-            swal({
-                title: 'Error',
-                text: msg,
-                icon: 'error',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-danger',
-                        closeModal: true
+            if (idTickets === '') {
+                const msg = "El ticket no fue creado correctamente.";
+                swal({
+                    title: 'No se puede crear',
+                    text: msg,
+                    icon: 'error',
+                    buttons: {
+                        confirmar: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true
+                        }
                     }
-                }
-            });
-        } else {
-            const msg = "El ticket fue creado correctamente."
-            swal({
-                title: 'Informacion',
-                text: msg,
-                icon: 'success',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-primary',
-                        closeModal: true
+                });
+            } else {
+                const msg = "El ticket fue creado correctamente.";
+                swal({
+                    title: 'Felicidades ',
+                    text: msg,
+                    icon: 'success',
+                    buttons: {
+                        confirmar: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-primary',
+                            closeModal: true
+                        }
                     }
-                }
-            });
-
-            setTiket({
-                id:id,
-                email: '',
-                contenido: '',
-                fecha: ''
-            })
-            navigate(`/home2/${id}`)
+                });
+                setTikets({
+                    title: '',
+                    description: '',
+                    username: '',
+                    date: ''
+                });
+            }
+        } catch (error) {
+            console.error("Error al crear el ticket:", error);
         }
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
         crearTicket();
     }
-
     const fechaActual = new Date().toISOString().split("T")[0];
   return (
     <div>
@@ -139,7 +142,7 @@ const navigate = useNavigate();
                   <i /> Enviar
                 </button>
               </div>
-              <Link to={`/Home2/${id}`} className="btn btn-block btn-danger">
+              <Link to={`/Home2`} className="btn btn-block btn-danger">
                 <i /> Volver
               </Link>
           </form>

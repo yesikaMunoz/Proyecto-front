@@ -45,12 +45,15 @@ const EditarTickets = () => {
         try {
             await axios.put(url, tikets);
             show_alerta("Éxito", "Detalles del tikets actualizados correctamente");
-            navigate("/Tikets");
+            navigate();
         } catch (error) {
             console.error("Error al actualizar detalles del tikets:", error);
             show_alerta("Error", "Hubo un error al actualizar los detalles del tikets");
         }
     };
+
+    const fechaActual = new Date().toISOString().split("T")[0];
+
     return (
         <div className="wrapper">
         <Navbar></Navbar>
@@ -74,7 +77,7 @@ const EditarTickets = () => {
                     <div className="register-box">
                         <div className="card">
                             <div className="card-body register-card-body">
-                                <p className="login-box-msg">Registro de pacientes</p>
+                                <p className="login-box-msg">Registro de tickets</p>
                                 <form onSubmit={handleSubmit}>
                                     <div className="input-group mb-3">
                                         <input
@@ -103,6 +106,7 @@ const EditarTickets = () => {
                                             value={tikets.fecha}
                                             onChange={handleInputChange}
                                             required
+                                            min={fechaActual}
                                         />
                                         <div className="input-group-append">
                                             <div className="input-group-text">

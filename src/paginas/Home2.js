@@ -3,10 +3,9 @@ import Navbar from "../componentes/Navbar";
 import SidebarContainer from "../componentes/SidebarContainer";
 import ContentHeader from "../componentes/ContentHeader";
 import Footer from "../componentes/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const Home = () => {
-  const {id} = useParams();
   return (
     <div className="wrapper">
       <Navbar></Navbar>
@@ -32,7 +31,7 @@ const Home = () => {
                   <div className="icon">
                   <i className="nav-icon fas fa-share"></i>
                   </div>
-                  <Link to={`/CrearTikets/${id}`} className="small-box-footer">
+                  <Link to={`/CrearTikets`} className="small-box-footer">
                     Crear Ticket
                     <i className="fas fa arrow-circle-right" />
                   </Link>
@@ -49,7 +48,7 @@ const Home = () => {
                   <div className="icon">
                   <i className="nav-icon fas  fa-paper-plane" />
                   </div>
-                  <Link to={`/Tikets/${id}`} className="small-box-footer">
+                  <Link to={`/Tikets`} className="small-box-footer">
                     tus tickets
                     <i className="fas fa arrow-circle-right" />
                   </Link>

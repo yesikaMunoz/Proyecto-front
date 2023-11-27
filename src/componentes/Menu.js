@@ -7,7 +7,7 @@ const Menu = () => {
     <nav className="mt-2">
       <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li className="nav-item">
-          <Link to={`/Home2/${id}`} className="nav-link">
+          <Link to={`/Home2`} className="nav-link">
             <i className="nav-icon fas fa-th" />
             <p>
               Inicio
@@ -16,7 +16,7 @@ const Menu = () => {
         </li>
 
         <li className="nav-item">
-          <Link to={`/Tikets/${id}`} className="nav-link">
+          <Link to={`/Tikets`} className="nav-link">
             <i className="nav-icon fas  fa-paper-plane" />
             <p>
               Tikets
@@ -24,7 +24,7 @@ const Menu = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to={`/Respuestas/${id}`} className="nav-link">
+          <Link to={`/Respuestas`} className="nav-link">
             <i className="nav-icon fas fa-share" />
             <p>
               Respuestas

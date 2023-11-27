@@ -1,6 +1,7 @@
 // AdminPage.js
 import React from 'react';
 import Chat from './chat';
+import { Link } from 'react-router-dom';
 
 const AdminPage = () => {
   return (
@@ -9,7 +10,12 @@ const AdminPage = () => {
       <h1>Panel de Administrador</h1>
       {/* ... */}
       <Chat tipoUsuario="administador" />
+
+      <Link to={`/Home`} className="btn btn-primary">
+     <i /> Volver
+   </Link>
     </div>
+     
   );
 };
 
