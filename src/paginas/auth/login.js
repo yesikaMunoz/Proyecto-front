@@ -8,6 +8,8 @@ const Login = () => {
     const [usuario, setUsuario] = useState({
         email: '',
         password: ''
+
+        
     });
 
     const { email, password } = usuario;

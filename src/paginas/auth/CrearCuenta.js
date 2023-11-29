@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
 
 const CrearCuenta = () => {
+  const navigate =  useNavigate();
   const [usuario, setUsuario] = useState({
     nombre: "",
     apellido: "",
@@ -120,6 +121,7 @@ const CrearCuenta = () => {
                 }
               }
             });
+            navigate("/login")
     
             setUsuario({
               nombre: "",

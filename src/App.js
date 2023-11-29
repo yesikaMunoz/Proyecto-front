@@ -16,6 +16,7 @@ import EditarTickets from './paginas/tikets/EditarTickets';
 import AdminPage from './paginas/tikets/adminchat';
 import ClientPage from './paginas/tikets/clientechat';
 import CrearCuentaAdmin from './paginas/auth/crearCuentaAdmi';
+import Chat from './paginas/tikets/chat';
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" exact element={<Inicio/>}/> 
+          <Route path="/chat/:id" exact element={<Chat/>}/> 
           <Route path="/login" exact element={<Login/>}/> 
           <Route path="/CrearCuenta" exact element={<CrearCuenta/>}/>
           <Route path="/CrearCuentaAdmi" exact element={<CrearCuentaAdmin/>}/>
@@ -41,8 +43,8 @@ function App() {
           <Route path="/InfoRespuesta" exact element={<InfoRespuestas/>}/>
           <Route path="/ticketAdmin" exact element={<VerTiketsAdmin/>}/>
           <Route path="/editarTiket/:id" exact element={<EditarTickets/>}/>
-          <Route path="/adminchat"  exact element={<AdminPage/>} />
-          <Route path="/clientechat"  exact element={<ClientPage/>} />
+          <Route path="/adminchat/:id"  exact element={<AdminPage/>} />
+          <Route path="/clientechat/:id"  exact element={<ClientPage/>} />
 
 
 

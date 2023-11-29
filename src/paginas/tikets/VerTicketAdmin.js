@@ -157,8 +157,9 @@ if (response) {
                             <td>{tiket.contenido}</td>
                             <td>{tiket.fecha}</td>
                             <td>
-                                <Link to={`/InfoTiket/${tiket.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>;
+                                <Link to={`/InfoTiket/${tiket.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>
                                 <button onClick={(e)=>eliminarTicket(e, tiket.id)} className="btn btn-sm btn-danger">Eliminar</button>
+                                <Link to={`/Chat/${tiket.id}`} className="btn btn-sm btn-primary">Responder ticket</Link>
                             </td>
                         </tr>
                   )
