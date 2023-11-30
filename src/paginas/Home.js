@@ -95,14 +95,14 @@ const Home = () => {
               <div className="col-lg-3 col-6">
                 <div className="small-box bg-info">
                   <div className="inner">
-                    <h3>Chat</h3>
+                    <h3>Cer clientes</h3>
                     <p>&nbsp;</p>
                   </div>
                   <div className="icon">
                   <i className="nav-icon fas  fa-paper-plane" />
                   </div>
-                  <Link to={`/adminchat`} className="small-box-footer">
-                    Chat
+                  <Link to={`/verclientes`} className="small-box-footer">
+                    Ver clientes
                     <i className="fas fa arrow-circle-right" />
                   </Link>
                 </div>

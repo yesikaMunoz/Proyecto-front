@@ -16,7 +16,7 @@ import EditarTickets from './paginas/tikets/EditarTickets';
 import AdminPage from './paginas/tikets/adminchat';
 import ClientPage from './paginas/tikets/clientechat';
 import CrearCuentaAdmin from './paginas/auth/crearCuentaAdmi';
-
+import VerClientes from './paginas/tikets/verClientes';
 
 
 /*import logo from './logo.svg';
@@ -29,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Inicio/>}/> 
           <Route path="/login" exact element={<Login/>}/> 
+          <Route path="/verClientes" exact element={<VerClientes/>}/>
           <Route path="/CrearCuenta" exact element={<CrearCuenta/>}/>
           <Route path="/CrearCuentaAdmi" exact element={<CrearCuentaAdmin/>}/>
           <Route path="/Home" exact element={<Home/>}/>

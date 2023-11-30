@@ -15,30 +15,6 @@
       "password": "123456",
       "tipoUsuario": "rol2",
       "id": 4
-    },
-    {
-      "nombre": "lola",
-      "apellido": "lolo",
-      "email": "lola@gmail.com",
-      "password": "123456",
-      "tipoUsuario": "rol2",
-      "id": 5
-    },
-    {
-      "nombre": "lorena",
-      "apellido": "ramirez",
-      "email": "lorena@gmail.com",
-      "password": "123456",
-      "tipoUsuario": "rol2",
-      "id": 6
-    },
-    {
-      "nombre": "yesika",
-      "apellido": "seulveda",
-      "email": "yesica20@gmail.com",
-      "password": "123456",
-      "tipoUsuario": "rol2",
-      "id": 7
     }
   ],
   "tikets": [
@@ -87,6 +63,20 @@
       "fecha": "2023-11-28",
       "userId": "3",
       "id": "J0_otuu"
+    },
+    {
+      "email": "juan@gmail.com",
+      "contenido": "dasda",
+      "fecha": "2023-11-30",
+      "userId": "4",
+      "id": "Iipab0a"
+    },
+    {
+      "email": "jua@gmail",
+      "contenido": "ahjshjas",
+      "fecha": "2023-12-06",
+      "userId": "4",
+      "id": "8f5O-yh"
     }
   ],
   "respuesta": [
